@@ -61,6 +61,14 @@ class AddProWholesale implements DataPatchInterface
         $this->moduleDataSetup->endSetup();
     }
 
+    public function revert()
+    {
+        $this->moduleDataSetup->startSetup();
+        $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
+        $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'pro_wholesale');
+        $this->moduleDataSetup->endSetup();
+    }
+
     public static function getDependencies()
     {
         return [];
