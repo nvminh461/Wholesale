@@ -7,7 +7,8 @@ class ContactWholesaleButton extends Template
 {
     public function getButtonUrl()
     {
+
         // Xử lý logic để trả về URL cho việc xử lý sự kiện của nút "Contact for Wholesale"
-        return $this->getUrl('admin/dev_wholesale/contact/index/');
+        return $this->getUrl('admin/Dev_Wholesale/contact/index/');
     }
 }

@@ -7,6 +7,9 @@
                 <block class="Dev\Wholesale\Block\ContactWholesaleButton" name="view.addto.wholesale"
                        after="-"
                        template="Dev_Wholesale::button/wholesale_contact_button.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Dev\Wholesale\ViewModel\ContactWholesaleButton</argument>
+                    </arguments>
                 </block>
             </container>
         </referenceContainer>

@@ -1,4 +1,9 @@
-<?php /** @var Dev\Wholesale\Block\ContactWholesaleButton $block */ ?>
+<?php
+/** @var Dev\Wholesale\Block\ContactWholesaleButton $block */
+/** @var \Dev\Wholesale\ViewModel\ContactWholesaleButton $viewModel */
+$viewModel = $block->getViewModel();
+dd($viewModel->getCustomerId());
+?>
 <button class="action primary wholesale-contact-button" type="button" id="contactWholesaleButton">
     Contact for Wholesale
 </button>
