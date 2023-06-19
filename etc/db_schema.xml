@@ -10,6 +10,7 @@
         <column xsi:type="varchar" name="product_name" nullable="false" length="255" comment="Product Name"/>
         <column xsi:type="varchar" name="phone" nullable="false" length="255" comment="Phone"/>
         <column xsi:type="text" name="message" nullable="true" comment="Message"/>
+        <column xsi:type="int" name="status" nullable="false" comment="Status send mail"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="contact_id"/>
         </constraint>

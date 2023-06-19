@@ -82,7 +82,15 @@
                 <label translate="true">Message</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Dev\Banner\Ui\Component\Listing\Column\BannerActions">
+        <column name="status" component="Magento_Ui/js/grid/columns/select" sortOrder="40">
+            <settings>
+                <options class="Dev\Wholesale\Model\Contact\Source\Status"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">STATUS SEND MAIL</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Dev\Wholesale\Ui\Component\Listing\Column\ContactActions">
             <settings>
                 <indexField>contact_id</indexField>
                 <resizeEnabled>false</resizeEnabled>
