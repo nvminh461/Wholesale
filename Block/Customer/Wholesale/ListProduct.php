@@ -6,6 +6,7 @@
 
 namespace Dev\Wholesale\Block\Customer\Wholesale;
 
+use Magento\Catalog\Model\Product;
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 
@@ -38,6 +39,13 @@ class ListProduct extends \Magento\Customer\Block\Account\Dashboard
     protected $currentCustomer;
 
     /**
+     * Catalog product model
+     *
+     * @var \Magento\Catalog\Api\ProductRepositoryInterface
+     */
+    protected $productRepository;
+
+    /**
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
@@ -48,14 +56,15 @@ class ListProduct extends \Magento\Customer\Block\Account\Dashboard
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\View\Element\Template\Context                     $context,
-        \Magento\Customer\Model\Session                                      $customerSession,
-        \Magento\Newsletter\Model\SubscriberFactory                          $subscriberFactory,
-        CustomerRepositoryInterface                                          $customerRepository,
-        AccountManagementInterface                                           $customerAccountManagement,
+        \Magento\Framework\View\Element\Template\Context             $context,
+        \Magento\Customer\Model\Session                              $customerSession,
+        \Magento\Newsletter\Model\SubscriberFactory                  $subscriberFactory,
+        CustomerRepositoryInterface                                  $customerRepository,
+        AccountManagementInterface                                   $customerAccountManagement,
         \Dev\Wholesale\Model\ResourceModel\Contact\CollectionFactory $collectionFactory,
-        \Magento\Customer\Helper\Session\CurrentCustomer                     $currentCustomer,
-        array                                                                $data = [],
+        \Magento\Catalog\Api\ProductRepositoryInterface              $productRepository,
+        \Magento\Customer\Helper\Session\CurrentCustomer             $currentCustomer,
+        array                                                        $data = [],
     )
     {
         $this->_collectionFactory = $collectionFactory;
@@ -67,6 +76,7 @@ class ListProduct extends \Magento\Customer\Block\Account\Dashboard
             $customerAccountManagement,
             $data
         );
+        $this->productRepository = $productRepository;
         $this->currentCustomer = $currentCustomer;
     }
 
@@ -131,16 +141,16 @@ class ListProduct extends \Magento\Customer\Block\Account\Dashboard
     }
 
     /**
-     * Get product URL
+     * Get product data
      *
-     * @param \Magento\Catalog\Model\Product $product
-     * @return string
-     * @since 100.2.0
+     * @return Product
      */
-    public function getProductUrl($product)
+    public function getProductData($wholesale)
     {
-        return $product->getProductUrl();
+        if ($wholesale->getContactId() && !$this->getProductCacheData()) {
+            $product = $this->productRepository->getById($wholesale->getProductId());
+            $this->setProductCacheData($product);
+        }
+        return $this->getProductCacheData();
     }
-
-
 }

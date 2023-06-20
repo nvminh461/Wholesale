@@ -33,7 +33,7 @@ class View extends \Magento\Catalog\Block\Product\AbstractProduct
     protected $productRepository;
 
     /**
-     * Contact wholesale model
+     * Review model
      *
      * @var \Dev\Wholesale\Model\ContactFactory
      */

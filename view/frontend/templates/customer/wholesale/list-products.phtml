@@ -17,6 +17,9 @@
             <caption class="table-caption"><?= $escaper->escapeHtml(__('Product Wholesales')) ?></caption>
             <thead>
             <tr>
+                <th scope="col" class="col description"><?= $escaper->escapeHtml(__('Customer Name')) ?></th>
+                <th scope="col" class="col description"><?= $escaper->escapeHtml(__('Email')) ?></th>
+                <th scope="col" class="col description"><?= $escaper->escapeHtml(__('Phone Number')) ?></th>
                 <th scope="col" class="col item"><?= $escaper->escapeHtml(__('Product Name')) ?></th>
                 <th scope="col" class="col description"><?= $escaper->escapeHtml(__('Message')) ?></th>
                 <th scope="col" class="col actions">&nbsp;</th>
@@ -25,9 +28,18 @@
             <tbody>
             <?php foreach ($block->getWholesales() as $wholesale): ?>
                 <tr>
+                    <td data-th="<?= $escaper->escapeHtmlAttr(__('Customer Name')) ?>" class="col description">
+                        <?= $wholesale->getCustomerName() ?>
+                    </td>
+                    <td data-th="<?= $escaper->escapeHtmlAttr(__('Email')) ?>" class="col description">
+                        <?= $wholesale->getCustomerEmail() ?>
+                    </td>
+                    <td data-th="<?= $escaper->escapeHtmlAttr(__('Phone Number')) ?>" class="col description">
+                        <?= $wholesale->getPhone() ?>
+                    </td>
                     <td data-th="<?= $escaper->escapeHtml(__('Product Name')) ?>" class="col item">
                         <strong class="product-name">
-                            <a href="<?= $escaper->escapeUrl($block->getProductUrl($wholesale)) ?>">
+                            <a href="<?= $escaper->escapeUrl($block->getProductData($wholesale)->getProductUrl()) ?>">
                                 <?= $escaper->escapeHtml($wholesale->getProductName()) ?>
                             </a>
                         </strong>
@@ -40,6 +52,7 @@
                             <span><?= $escaper->escapeHtml(__('See Details')) ?></span>
                         </a>
                     </td>
+
                 </tr>
             <?php endforeach; ?>
             </tbody>

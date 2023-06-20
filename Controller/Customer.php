@@ -3,6 +3,7 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Dev\Wholesale\Controller;
 
 use Magento\Framework\App\Action\Action;
@@ -29,7 +30,8 @@ abstract class Customer extends Action
     public function __construct(
         Context $context,
         Session $customerSession
-    ) {
+    )
+    {
         $this->customerSession = $customerSession;
         parent::__construct($context);
     }
