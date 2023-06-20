@@ -1,4 +1,5 @@
 <?php
+
 namespace Dev\Wholesale\Ui\Component;
 
 use Magento\Framework\Api\Filter;
@@ -9,7 +10,9 @@ use Magento\Framework\App\RequestInterface;
 use Magento\Framework\AuthorizationInterface;
 use Magento\Framework\View\Element\UiComponent\DataProvider\Reporting;
 
-
+/**
+ * The DataProvider class is a custom implementation of the UiComponent DataProvider for the Wholesale module.
+ */
 class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
 {
     /**
@@ -23,6 +26,8 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
     private $additionalFilterPool;
 
     /**
+     * Initialize the DataProvider.
+     *
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
@@ -64,7 +69,7 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
     }
 
     /**
-     * Get authorization info.
+     * Get the authorization instance.
      *
      * @deprecated 101.0.7
      * @return AuthorizationInterface|mixed
@@ -78,7 +83,7 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
     }
 
     /**
-     * Prepares Meta
+     * Prepare the metadata for the DataProvider.
      *
      * @return array
      */
@@ -107,7 +112,10 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
     }
 
     /**
-     * @inheritdoc
+     * Add a filter to the DataProvider.
+     *
+     * @param Filter $filter
+     * @return void
      */
     public function addFilter(Filter $filter)
     {

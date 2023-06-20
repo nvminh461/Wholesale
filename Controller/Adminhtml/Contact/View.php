@@ -11,10 +11,17 @@ class View extends \Magento\Backend\App\Action implements HttpGetActionInterface
 
     protected $resultPageFactory;
 
+    /**
+     * View constructor.
+     *
+     * @param Action\Context $context
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param \Magento\Framework\Registry $registry
+     */
     public function __construct(
-        Action\Context                             $context,
+        Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        \Magento\Framework\Registry                $registry
+        \Magento\Framework\Registry $registry
     )
     {
         $this->resultPageFactory = $resultPageFactory;
@@ -22,13 +29,23 @@ class View extends \Magento\Backend\App\Action implements HttpGetActionInterface
         parent::__construct($context);
     }
 
+    /**
+     * Initialize action
+     *
+     * @return \Magento\Framework\Controller\ResultInterface
+     */
     protected function _initAction()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('Dev_Wholesale::contact_manager');
+        $resultPage->setActiveMenu('Magento_Customer::customer_manage');
         return $resultPage;
     }
 
+    /**
+     * Execute action
+     *
+     * @return \Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
         // 1. Get ID and create model

@@ -53,8 +53,8 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
         $data = $this->dataPersistor->get('contact');
         if (!empty($data)) {
-            $banner = $this->collection->getNewEmptyItem();
-            $banner->setData($data);
+            $contact = $this->collection->getNewEmptyItem();
+            $contact->setData($data);
             $this->loadedData[$contact->getId()] = $contact->getData();
             $this->dataPersistor->clear('contact');
         }

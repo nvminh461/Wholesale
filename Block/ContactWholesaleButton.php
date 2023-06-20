@@ -19,6 +19,18 @@ class ContactWholesaleButton extends Template
     protected $messageManager;
     protected $urlInterface;
 
+    /**
+     * ContactWholesaleButton constructor.
+     *
+     * @param Template\Context $context
+     * @param CustomerSession $customerSession
+     * @param ProductFactory $productFactory
+     * @param ProductViewBlock $productViewBlock
+     * @param ProductRepository $productRepository
+     * @param ManagerInterface $messageManager
+     * @param UrlInterface $urlInterface
+     * @param array $data
+     */
     public function __construct(
         Template\Context  $context,
         CustomerSession   $customerSession,
@@ -39,11 +51,16 @@ class ContactWholesaleButton extends Template
         parent::__construct($context, $data);
     }
 
+    /**
+     * Get the URL for the wholesale button
+     *
+     * @return string|null
+     */
     public function getButtonUrl()
     {
         if ($this->compareAttributes()) {
             $pathUrl = 'admin/dev_wholesale/contact/';
-            return $this->getUrl($pathUrl);
+            return $this->getUrl($pathUrl); // Lấy URL cho nút wholesale
         } else {
             $errorMessage = 'Not eligible to access the path.';
             $this->messageManager->addErrorMessage($errorMessage);
@@ -53,6 +70,11 @@ class ContactWholesaleButton extends Template
         return null;
     }
 
+    /**
+     * Check the wholesale attribute of the customer
+     *
+     * @return int
+     */
     public function checkAttributeCustomer()
     {
         $customerAttribute = '';
@@ -62,6 +84,11 @@ class ContactWholesaleButton extends Template
         return $customerAttribute;
     }
 
+    /**
+     * Check the wholesale attribute of the product
+     *
+     * @return int|null
+     */
     public function checkAttributeProduct()
     {
         $productId = $this->productViewBlock->getProduct()->getId();
@@ -74,6 +101,11 @@ class ContactWholesaleButton extends Template
         return $pro_wholesale;
     }
 
+    /**
+     * Compare the wholesale attributes of the customer and product
+     *
+     * @return bool
+     */
     public function compareAttributes()
     {
         $customerAttribute = $this->checkAttributeCustomer();
