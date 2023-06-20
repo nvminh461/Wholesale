@@ -1,6 +1,6 @@
 <?php
 
-namespace Dev\WholeSale\Setup\Patch\Data;
+namespace Dev\Wholesale\Setup\Patch\Data;
 
 use Magento\Customer\Model\Customer;
 use Magento\Customer\Setup\CustomerSetupFactory;

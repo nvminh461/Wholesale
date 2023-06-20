@@ -3,10 +3,9 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Dev\Wholesale\Controller\Customer;
 
-use Dev\Wholesale\Controller\Customer as CustomerController;
+use Magento\Review\Controller\Customer as CustomerController;
 use Magento\Framework\Controller\ResultFactory;
 
 class Index extends CustomerController
