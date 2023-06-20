@@ -9,6 +9,13 @@ class SendMail extends GenericButton implements ButtonProviderInterface
 {
     protected $contact;
 
+    /**
+     * SendMail constructor.
+     *
+     * @param \Magento\Backend\Block\Widget\Context $context
+     * @param Contact $contact
+     * @param array $data
+     */
     public function __construct(
         \Magento\Backend\Block\Widget\Context $context,
         Contact $contact,
@@ -18,6 +25,11 @@ class SendMail extends GenericButton implements ButtonProviderInterface
         parent::__construct($context, $data);
     }
 
+    /**
+     * Get button data
+     *
+     * @return array
+     */
     public function getButtonData()
     {
         $buttonData = [];
@@ -41,6 +53,11 @@ class SendMail extends GenericButton implements ButtonProviderInterface
         return $buttonData;
     }
 
+    /**
+     * Get the URL for sending mail
+     *
+     * @return string
+     */
     public function SendMailUrl()
     {
         $contactId = $this->getContractId();

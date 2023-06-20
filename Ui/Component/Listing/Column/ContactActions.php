@@ -7,12 +7,30 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
+/**
+ * The ContactActions class represents a custom column in the contact listing UI component.
+ */
 class ContactActions extends Column
 {
+    /**
+     * URL path for viewing a contact.
+     */
     const CONTACT_URL_PATH_VIEW = 'dev_wholesale/contact/view';
 
+    /**
+     * @var UrlInterface
+     */
     protected $urlBuilder;
 
+    /**
+     * Initialize the column.
+     *
+     * @param ContextInterface $context
+     * @param UiComponentFactory $uiComponentFactory
+     * @param UrlInterface $urlBuilder
+     * @param array $components
+     * @param array $data
+     */
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
@@ -24,6 +42,12 @@ class ContactActions extends Column
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
+    /**
+     * Prepare the data source for the column.
+     *
+     * @param array $dataSource
+     * @return array
+     */
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
