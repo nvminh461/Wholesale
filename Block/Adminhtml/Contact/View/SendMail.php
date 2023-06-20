@@ -44,10 +44,10 @@ class SendMail extends GenericButton implements ButtonProviderInterface
         // Check the status value and conditionally add the button data
         if ($status == 0) {
             $buttonData = [
-                'label' => __('Send Mail'), // Nhãn của nút
-                'on_click' => sprintf("location.href = '%s';", $this->SendMailUrl()), // Xử lý khi nút được nhấp
-                'class' => 'save primary', // Lớp CSS cho nút
-                'sort_order' => 20 // Thứ tự sắp xếp của nút
+                'label' => __('Send Mail'),
+                'on_click' => sprintf("location.href = '%s';", $this->SendMailUrl()),
+                'class' => 'save primary',
+                'sort_order' => 20
             ];
         }
         return $buttonData;
@@ -61,6 +61,6 @@ class SendMail extends GenericButton implements ButtonProviderInterface
     public function SendMailUrl()
     {
         $contactId = $this->getContractId();
-        return $this->getUrl('*/*/SendMail', ['contact_id' => $contactId]); // URL cho việc gửi mail
+        return $this->getUrl('*/*/SendMail', ['contact_id' => $contactId]);
     }
 }

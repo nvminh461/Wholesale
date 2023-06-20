@@ -28,7 +28,7 @@ class GenericButton
      */
     public function getContractId()
     {
-        $contractId = $this->context->getRequest()->getParam('contact_id'); // Lấy ID hợp đồng từ các tham số yêu cầu
+        $contractId = $this->context->getRequest()->getParam('contact_id');
         if ($contractId) {
             return $contractId;
         }
@@ -44,6 +44,6 @@ class GenericButton
      */
     public function getUrl($route = '', $params = [])
     {
-        return $this->context->getUrlBuilder()->getUrl($route, $params); // Lấy URL cho một route cụ thể và các tham số
+        return $this->context->getUrlBuilder()->getUrl($route, $params);
     }
 }

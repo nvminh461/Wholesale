@@ -60,7 +60,7 @@ class ContactWholesaleButton extends Template
     {
         if ($this->compareAttributes()) {
             $pathUrl = 'admin/dev_wholesale/contact/';
-            return $this->getUrl($pathUrl); // Lấy URL cho nút wholesale
+            return $this->getUrl($pathUrl);
         } else {
             $errorMessage = 'Not eligible to access the path.';
             $this->messageManager->addErrorMessage($errorMessage);
