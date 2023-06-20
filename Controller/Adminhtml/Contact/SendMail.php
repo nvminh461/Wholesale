@@ -17,6 +17,15 @@ class SendMail extends \Magento\Backend\App\Action implements HttpGetActionInter
     protected $resultFactory;
 
 
+    /**
+     * SendMail constructor.
+     *
+     * @param Action\Context $context
+     * @param TransportBuilder $transportBuilder
+     * @param StateInterface $inlineTranslation
+     * @param ResultFactory $resultFactory
+     * @param Contact $contact
+     */
     public function __construct(
         Action\Context $context,
         TransportBuilder $transportBuilder,
@@ -31,6 +40,11 @@ class SendMail extends \Magento\Backend\App\Action implements HttpGetActionInter
         parent::__construct($context);
     }
 
+    /**
+     * Execute action
+     *
+     * @return \Magento\Framework\Controller\Result\Redirect
+     */
     public function execute()
     {
         $resultRedirect = $this->resultRedirectFactory->create();
