@@ -6,6 +6,7 @@
                 comment="Contact ID"/>
         <column xsi:type="int" name="customer_id" nullable="false" comment="Customer ID"/>
         <column xsi:type="varchar" name="customer_name" nullable="false" length="255" comment="Customer Name"/>
+        <column xsi:type="int" name="product_id" nullable="false" comment="Product ID"/>
         <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Customer Email"/>
         <column xsi:type="varchar" name="product_name" nullable="false" length="255" comment="Product Name"/>
         <column xsi:type="varchar" name="phone" nullable="false" length="255" comment="Phone"/>

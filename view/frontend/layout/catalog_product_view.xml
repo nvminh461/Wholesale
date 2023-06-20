@@ -6,7 +6,8 @@
             <container name="product.info.extrahint" as="extrahint" label="Product View Extra Hint">
                 <block class="Dev\Wholesale\Block\ContactWholesaleButton" name="view.addto.wholesale"
                        after="-"
-                       template="Dev_Wholesale::button/wholesale_contact_button.phtml">
+                       template="Dev_Wholesale::button/wholesale_contact_button.phtml"
+                       cacheable="false">
                 </block>
             </container>
         </referenceContainer>
