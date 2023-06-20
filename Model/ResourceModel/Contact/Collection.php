@@ -1,4 +1,5 @@
 <?php
+
 namespace Dev\Wholesale\Model\ResourceModel\Contact;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
