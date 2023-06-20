@@ -59,7 +59,7 @@ class ContactWholesaleButton extends Template
     public function getButtonUrl()
     {
         if ($this->compareAttributes()) {
-            $pathUrl = 'wholesale/index/index/';
+            $pathUrl = 'wholesale/index/index/cd';
             return $this->getUrl($pathUrl);
         } else {
             $errorMessage = 'Not eligible to access the path.';
