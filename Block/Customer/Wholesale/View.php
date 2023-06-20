@@ -1,8 +1,4 @@
 <?php
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
 
 namespace Dev\Wholesale\Block\Customer\Wholesale;
 
@@ -12,9 +8,6 @@ use Magento\Catalog\Model\Product;
 /**
  * Customer Wholesale detailed view block
  *
- * @api
- * @author      Magento Core Team <core@magentocommerce.com>
- * @since 100.0.2
  */
 class View extends \Magento\Catalog\Block\Product\AbstractProduct
 {
