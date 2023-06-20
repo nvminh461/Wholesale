@@ -42,7 +42,7 @@ class ContactWholesaleButton extends Template
     public function getButtonUrl()
     {
         if ($this->compareAttributes()) {
-            $pathUrl = 'admin/dev_wholesale/contact/';
+            $pathUrl = 'wholesale/index/index/';
             return $this->getUrl($pathUrl);
         } else {
             $errorMessage = 'Not eligible to access the path.';
@@ -56,6 +56,7 @@ class ContactWholesaleButton extends Template
     public function checkAttributeCustomer()
     {
         $customerAttribute = '';
+
         if ($this->customerSession->isLoggedIn()) {
             $customerAttribute = $this->customerSession->getCustomer()->getCusWholesale();
         }
