@@ -78,6 +78,7 @@ class ContactWholesaleButton extends Template
     public function checkAttributeCustomer()
     {
         $customerAttribute = '';
+
         if ($this->customerSession->isLoggedIn()) {
             $customerAttribute = $this->customerSession->getCustomer()->getCusWholesale();
         }
