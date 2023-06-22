@@ -4,7 +4,7 @@
     <body>
         <referenceContainer name="content">
             <block class="Dev\Wholesale\Block\Frontend\ContactForm" name="dev_wholesale_contact_form"
-                   template="Dev_Wholesale::contact_form.phtml" cacheable="false"/>
+                   template="Dev_Wholesale::form/contact_form.phtml" cacheable="false"/>
         </referenceContainer>
     </body>
 </page>
