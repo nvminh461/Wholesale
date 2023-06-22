@@ -125,11 +125,10 @@ class ListProduct extends \Magento\Customer\Block\Account\Dashboard
     }
 
     /**
-     * Get review URL
+     * Get Wholesale URL
      *
      * @param \Dev\Wholesale\Model\Contact $wholesale
      * @return string
-     * @since 100.2.0
      */
     public function getWholesaleUrl($wholesale)
     {

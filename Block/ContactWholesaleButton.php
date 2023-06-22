@@ -7,8 +7,8 @@ use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Catalog\Model\ProductFactory;
 use Magento\Catalog\Block\Product\View as ProductViewBlock;
 use Magento\Catalog\Model\ProductRepository;
-use Magento\Framework\Message\ManagerInterface;
-use Magento\Framework\UrlInterface;
+use Magento\Framework\App\ResponseInterface;
+use Dev\Wholesale\Model\Contact;
 
 class ContactWholesaleButton extends Template
 {
@@ -18,6 +18,8 @@ class ContactWholesaleButton extends Template
     protected $productRepository;
     protected $messageManager;
     protected $urlInterface;
+    protected $responseInterface;
+    protected $contactModel;
 
     /**
      * ContactWholesaleButton constructor.
@@ -28,7 +30,9 @@ class ContactWholesaleButton extends Template
      * @param ProductViewBlock $productViewBlock
      * @param ProductRepository $productRepository
      * @param ManagerInterface $messageManager
+     * @param ResponseInterface $responseInterface
      * @param UrlInterface $urlInterface
+     * @param Contact $contactModel
      * @param array $data
      */
     public function __construct(
@@ -37,8 +41,8 @@ class ContactWholesaleButton extends Template
         ProductFactory    $productFactory,
         ProductViewBlock  $productViewBlock,
         ProductRepository $productRepository,
-        ManagerInterface  $messageManager,
-        UrlInterface      $urlInterface,
+        ResponseInterface $responseInterface,
+        Contact           $contactModel,
         array             $data = []
     )
     {
@@ -46,8 +50,8 @@ class ContactWholesaleButton extends Template
         $this->productFactory = $productFactory;
         $this->productViewBlock = $productViewBlock;
         $this->productRepository = $productRepository;
-        $this->messageManager = $messageManager;
-        $this->urlInterface = $urlInterface;
+        $this->responseInterface = $responseInterface;
+        $this->contactModel = $contactModel;
         parent::__construct($context, $data);
     }
 
@@ -58,16 +62,23 @@ class ContactWholesaleButton extends Template
      */
     public function getButtonUrl()
     {
+        $pathUrl = '';
+        $productId = $this->getIdProduct();
         if ($this->compareAttributes()) {
-            $pathUrl = 'wholesale/index/index/cd';
-            return $this->getUrl($pathUrl);
-        } else {
-            $errorMessage = 'Not eligible to access the path.';
-            $this->messageManager->addErrorMessage($errorMessage);
-            $currentUrl = $this->urlInterface->getCurrentUrl();
-            $this->getResponse()->setRedirect($currentUrl)->sendResponse();
+            $pathUrl = 'wholesale/index/index/';
         }
-        return null;
+        return $this->getUrl($pathUrl, ['product_id' => $productId]);
+    }
+
+    /**
+     * Get the id of the product
+     *
+     * @return int|null
+     */
+    public function getIdProduct()
+    {
+        $productId = $this->productViewBlock->getProduct()->getId();
+        return $productId;
     }
 
     /**
@@ -80,7 +91,7 @@ class ContactWholesaleButton extends Template
         $customerAttribute = '';
 
         if ($this->customerSession->isLoggedIn()) {
-            $customerAttribute = $this->customerSession->getCustomer()->getCusWholesale();
+            $customerAttribute = $this->customerSession->getCustomer();
         }
         return $customerAttribute;
     }
@@ -92,14 +103,14 @@ class ContactWholesaleButton extends Template
      */
     public function checkAttributeProduct()
     {
-        $productId = $this->productViewBlock->getProduct()->getId();
+        $productId = $this->getIdProduct();
         try {
             $product = $this->productRepository->getById($productId);
-            $pro_wholesale = $product->getData('pro_wholesale');
+            $productAttribute = $product->getData('pro_wholesale');
         } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
             return null;
         }
-        return $pro_wholesale;
+        return $productAttribute;
     }
 
     /**
@@ -109,11 +120,17 @@ class ContactWholesaleButton extends Template
      */
     public function compareAttributes()
     {
-        $customerAttribute = $this->checkAttributeCustomer();
+        $customer = $this->checkAttributeCustomer();
+        $customerAttribute = $customer ? $customer->getCusWholesale() : '';
+        $customerId = $customer ? $customer->getId() : '';
+
         $productAttribute = $this->checkAttributeProduct();
+        $productId = $this->getIdProduct();
 
-        $compareResult = ($customerAttribute == 1 && $productAttribute == 1);
+        $contactCollection = $this->contactModel->getCollection()
+            ->addFieldToFilter('customer_id', $customerId)
+            ->addFieldToFilter('product_id', $productId);
 
-        return $compareResult;
+        return ($customerAttribute == 1 && $productAttribute == 1 && $contactCollection->getSize() == 0);
     }
 }
